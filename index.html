@@ -9,36 +9,39 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     .hero-bg {
-      background: linear-gradient(to right, rgba(255, 115, 0, 0.8), rgba(255, 115, 0, 0.5)), url('l.png') center/cover no-repeat;
-    }
+  background: url('l.png') center/cover no-repeat;
+}
+
   </style>
 </head>
 <body class="text-gray-800">
 
   <!-- Navbar -->
-  <header class="fixed w-full bg-white shadow z-50">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-4">
-      <div class="flex items-center space-x-3">
-        <img src="logo.png" alt="Logo" class="w-12 h-12 rounded-full">
-        <span class="text-xl font-bold text-orange-600">Crabster Technology</span>
-      </div>
-      <nav class="space-x-6 hidden md:block">
-        <a href="#services" class="hover:text-orange-600">Services</a>
-        <a href="#projects" class="hover:text-orange-600">Projects</a>
-        <a href="#team" class="hover:text-orange-600">Team</a>
-        <a href="#contact" class="hover:text-orange-600">Contact</a>
-      </nav>
+<header class="fixed w-full bg-white shadow z-50">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-4">
+    <div class="flex items-center space-x-3">
+      <img src="logo.png" alt="Logo" class="w-16 h-16 rounded-full"> <!-- increased size here -->
+      <span class="text-2xl font-bold text-orange-600">Crabster Technology</span> <!-- optionally increased text size too -->
     </div>
-  </header>
+    <nav class="space-x-6 hidden md:block">
+      <a href="#services" class="hover:text-orange-600">Services</a>
+      <a href="#projects" class="hover:text-orange-600">Projects</a>
+      <a href="#team" class="hover:text-orange-600">Team</a>
+      <a href="#contact" class="hover:text-orange-600">Contact</a>
+    </nav>
+  </div>
+</header>
+
 
   <!-- Hero -->
-  <section class="hero-bg h-screen flex items-center justify-center text-center text-white relative overflow-hidden">
-    <div data-aos="fade-up">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6">Unleash the Power of Technology</h1>
-      <p class="text-xl mb-8">AI • IoT • Innovations that Matter</p>
-      <a href="#contact" class="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-orange-100 transition">Get In Touch</a>
-    </div>
-  </section>
+<section class="hero-bg h-screen flex items-center justify-center text-center text-white relative overflow-hidden">
+  <div data-aos="fade-up">
+    <h1 class="text-5xl md:text-6xl font-bold mb-6 text-orange-500">Unleash the Power of Technology</h1>
+    <p class="text-xl mb-8 text-orange-500">AI • IoT • Innovations that Matter</p>
+    <a href="#contact" class="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-orange-100 transition">Get In Touch</a>
+  </div>
+</section>
+
 
   <!-- Services -->
   <section id="services" class="py-20">
@@ -58,21 +61,23 @@
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="py-20">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-orange-600 mb-12" data-aos="fade-up">Our Projects</h2>
-      <div class="grid md:grid-cols-2 gap-10" data-aos="fade-up">
-        <div class="relative group rounded-xl overflow-hidden shadow-lg border">
-          <img src="p.jpg" alt="Project 1" class="w-full h-64 object-cover group-hover:scale-110 transition">
-          <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition text-white p-6">
-            <h3 class="text-2xl font-semibold mb-2">Automated Watering System</h3>
-            <p>A solar-powered system that monitors soil moisture and waters plants automatically.</p>
-            <a href="project-details.html" class="mt-4 inline-block bg-orange-600 px-5 py-2 rounded hover:bg-orange-700">View Details</a>
-          </div>
+<section id="projects" class="py-20">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-orange-600 mb-12" data-aos="fade-up">Our Projects</h2>
+    
+    <div class="flex justify-center" data-aos="fade-up">
+      <div class="relative group rounded-xl overflow-hidden shadow-lg border max-w-md">
+        <img src="p.jpg" alt="Project 1" class="w-full h-64 object-cover group-hover:scale-110 transition">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition text-white p-6">
+          <h3 class="text-2xl font-semibold mb-2">Automated Watering System</h3>
+          <p>A solar-powered system that monitors soil moisture and waters plants automatically.</p>
+          <a href="project-details.html" class="mt-4 inline-block bg-orange-600 px-5 py-2 rounded hover:bg-orange-700">View Details</a>
         </div>
       </div>
     </div>
-  </section>
+    
+  </div>
+</section>
 
   <!-- Team -->
   <section id="team" class="py-20">
