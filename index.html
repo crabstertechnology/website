@@ -389,9 +389,12 @@
         <div class="flex items-center space-x-3">
           <div class="relative group">
             <div class="absolute inset-0 bg-secondary rounded-full blur opacity-30 group-hover:opacity-80 transition duration-300"></div>
-            <div class="relative z-10 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl border-2 border-white">CT</div>
-            <img src="logo.png" alt="Crabster Technology Logo" class="w-10 h-10 object-contain">
-          </div>
+             <!-- Logo image instead of text -->
+    <div class="relative z-10 w-12 h-12 bg-primary rounded-full flex items-center justify-center border-2 border-white overflow-hidden">
+      <img src="logo.png" alt="Crabster Technology Logo" class="w-10 h-10 object-contain">
+    </div>
+  </div>
+
           <span class="text-2xl font-bold text-dark hidden md:block">Crabster Technology</span>
         </div>
         
@@ -420,7 +423,7 @@
         </nav>
         
         <!-- CTA Button -->
-        <a href="#contact" class="hidden md:block px-6 py-2 bg-primary text-white rounded-full hover:bg-primary-light transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+        <a href="#contact" class="hidden md:block px-6 py-2 bg-primary text-black rounded-full hover:bg-primary-light transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
           Get in Touch
         </a>
         
