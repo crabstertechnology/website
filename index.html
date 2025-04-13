@@ -14,7 +14,7 @@
       --primary-light: #FFA76A; /* Lighter royal orange */
       --secondary: #FFFFFF; /* White */
       --accent: #FF8C42; /* Subtle royal orange (same as primary) */
-      --light: #F9F7F3; /* Offwhite for background */
+      --light: #F9F7F3; /* Off-white for background */
       --dark: #333333; /* Dark gray */
       --gray: #808080; /* Gray */
       --surface: #FFFFFF; /* White */
@@ -347,25 +347,23 @@
     </div>
     
   <!-- Mobile Menu -->
-<div id="mobile-nav" class="mobile-nav fixed top-0 right-0 w-full h-screen bg-white z-50 p-6 flex flex-col lg:hidden">
-  <div class="flex justify-between items-center mb-8">
-    <div class="flex items-center space-x-3">
-      <div class="relative z-10 w-12 h-12 bg-primary rounded-full flex items-center justify-center border-2 border-white overflow-hidden">
-        <img src="logo.png" alt="Crabster Technology Logo" class="w-10 h-10 object-contain">
+  <div id="mobile-nav" class="mobile-nav fixed top-0 right-0 w-full h-screen bg-white z-50 p-6 flex flex-col lg:hidden">
+    <div class="flex justify-between items-center mb-8">
+      <div class="flex items-center space-x-3">
+        <div class="relative z-10 w-12 h-12 bg-primary rounded-full flex items-center justify-center border-2 border-white overflow-hidden">
+          <img src="logo.png" alt="Crabster Technology Logo" class="w-10 h-10 object-contain">
+        </div>
+        <span class="text-2xl font-bold text-dark">Crabster</span>
       </div>
-      <span class="text-2xl font-bold text-dark">Crabster</span>
+      
+  
+      <button id="close-menu" class="focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
 
-    <button id="close-menu" class="focus:outline-none" aria-label="Close menu">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-  </div>
-
-  <!-- mobile nav links go here -->
-
-</div>
 
       
       <nav class="flex flex-col space-y-6 text-lg">
@@ -393,29 +391,48 @@
     <!-- Background Particles -->
     <div id="particles-js" class="absolute inset-0 z-0"></div>
     
-    <!-- Decorative Shapes -->
-    <div class="shape shape-circle top-20 left-10 animate-pulse-slow"></div>
-    <div class="shape shape-dots bottom-20 right-10 animate-float"></div>
+   <!-- Decorative Shapes -->
+<div class="shape shape-circle top-20 left-10 animate-pulse-slow"></div>
+<div class="shape shape-dots bottom-20 right-10 animate-float"></div>
+
+<!-- Hero Section -->
+<div class="container mx-auto px-6 z-10 mt-24">
+  <div class="flex flex-col-reverse lg:flex-row items-center">
     
-    <div class="container mx-auto px-6 z-10 mt-24">
-      <div class="flex flex-col-reverse lg:flex-row items-center">
-        <div class="lg:w-1/2 text-center lg:text-left" data-aos="fade-right">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            <span class="text-primary">Unleash</span> The<br>
-            <span class="highlight">Power Of Technology</span>
-          </h1>
-          <p class="text-lg md:text-xl mb-8 text-gray-700 max-w-lg">
-            At Crabster Technology, we create distinguished solutions that transform businesses with precision and innovation.
-          </p>
-          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
-            <a href="#services" class="px-8 py-3 border-2  text-dark rounded-full font-medium transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-black hover:border-primary hover:border-primary">
-              Explore Services
-            </a>
-            <a href="#projects" class="px-8 py-3 border-2  text-dark rounded-full font-medium transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-black hover:border-primary hover:border-primary">
-              View Projects
-            </a>
-          </div>
-        </div>
+    <!-- Text Content -->
+    <div class="lg:w-1/2 text-center lg:text-left" data-aos="fade-right">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+        <span class="text-primary">Unleash</span>
+        <span class="block md:inline">The</span>
+        <span class="highlight block md:inline">Power Of Technology</span>
+      </h1>
+
+      <p class="text-base sm:text-lg md:text-xl mb-8 text-gray-700 max-w-lg mx-auto lg:mx-0">
+        At Crabster Technology, we create distinguished solutions that transform businesses with precision and innovation.
+      </p>
+
+      <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
+        <a href="#services"
+          class="px-8 py-3 border-2 text-dark rounded-full font-medium transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-black hover:border-primary">
+          Explore Services
+        </a>
+        <a href="#projects"
+          class="px-8 py-3 border-2 text-dark rounded-full font-medium transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-black hover:border-primary">
+          View Projects
+        </a>
+      </div>
+    </div>
+
+    <!-- You can add your hero image or illustration on the right here if needed -->
+    <!-- Example:
+    <div class="lg:w-1/2 mb-10 lg:mb-0">
+      <img src="your-image.png" alt="Hero Illustration" class="w-full">
+    </div>
+    -->
+
+  </div>
+</div>
+
  <!-- Scroll Indicator -->
  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
   <span class="text-sm text-gray-600 mb-2">Scroll Down</span>
