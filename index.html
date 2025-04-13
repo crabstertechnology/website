@@ -1435,6 +1435,135 @@
   function addOrangeThemeStyles() {
   const styleEl = document.createElement('style');
   styleEl.textContent = `
+  <style>
+        /* Enhanced animations */
+        @keyframes pulse-animation {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+          100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+          animation: pulse-animation 1.5s infinite;
+        }
+        
+        @keyframes float-animation {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+          100% { transform: translateY(0px); }
+        }
+        
+        .float-animation {
+          animation: float-animation 3s ease-in-out infinite;
+        }
+        
+        /* Reveal animations */
+        .reveal {
+          position: relative;
+          opacity: 0;
+          transition: all 1s ease;
+        }
+        
+        .reveal.active {
+          opacity: 1;
+        }
+        
+        .reveal-left {
+          transform: translateX(-50px);
+        }
+        
+        .reveal-left.active {
+          transform: translateX(0);
+        }
+        
+        .reveal-right {
+          transform: translateX(50px);
+        }
+        
+        .reveal-right.active {
+          transform: translateX(0);
+        }
+        
+        .reveal-top {
+          transform: translateY(-50px);
+        }
+        
+        .reveal-top.active {
+          transform: translateY(0);
+        }
+        
+        .reveal-bottom {
+          transform: translateY(50px);
+        }
+        
+        .reveal-bottom.active {
+          transform: translateY(0);
+        }
+         /* Enhanced hover effects */
+        .hover-3d {
+          transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transform-style: preserve-3d;
+          perspective: 1000px;
+        }
+        
+        .hover-3d:hover {
+          transform: rotateY(5deg) rotateX(5deg);
+        }
+        
+        /* Card hover effects */
+        .card-hover {
+          transition: all 0.3s ease;
+          border-bottom: 3px solid transparent;
+        }
+        
+        .card-hover:hover {
+          transform: translateY(-10px);
+          border-color: var(--secondary);
+        }
+        
+        /* Service icon effects */
+        .service-icon {
+          transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        .service-card:hover .service-icon {
+          transform: rotateY(180deg);
+        }
+           /* Button hover animations */
+        .btn-animated {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .btn-animated:after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: -100%;
+          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+          transition: all 0.8s ease;
+        }
+        
+        .btn-animated:hover:after {
+          left: 100%;
+        }
+            /* Team member hover effect */
+        .team-card {
+          overflow: hidden;
+        }
+        
+        .team-card .team-info {
+          transform: translateY(100%);
+          transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover .team-info {
+          transform: translateY(0);
+        }
+       
+      </style>
     /* Orange button hover effect */
     button {
       transition: background-color 0.3s ease, transform 0.2s ease;
