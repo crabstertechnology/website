@@ -1155,8 +1155,14 @@
       });
     }
   });
-  let reviews = []; // array to hold submitted reviews
+ // Load saved reviews from localStorage when the page loads
+let reviews = JSON.parse(localStorage.getItem('testimonials')) || [];
 let visibleReviews = 4; // number of reviews to display initially
+
+// Display any existing reviews on page load
+document.addEventListener('DOMContentLoaded', function() {
+  displayReviews();
+});
 
 // Function to handle star rating selection
 document.querySelectorAll('#stars i').forEach((star, index) => {
@@ -1176,21 +1182,25 @@ function submitReview() {
   const service = document.getElementById('service').value;
   const comment = document.getElementById('comment').value.trim();
   const rating = document.getElementById('stars').dataset.rating || 0;
-
+  
   if (!username || !email || !service || !comment || rating == 0) {
     alert("Please fill in all fields and select a rating.");
     return;
   }
-
+  
   const newReview = {
     username,
     service,
     comment,
     rating,
-    date: new Date()
+    date: new Date().toISOString() // Store date as ISO string for proper serialization
   };
-
+  
   reviews.unshift(newReview); // add newest to front
+  
+  // Save to localStorage
+  localStorage.setItem('testimonials', JSON.stringify(reviews));
+  
   displayReviews();
   clearForm();
 }
@@ -1212,17 +1222,21 @@ function clearForm() {
 function displayReviews() {
   const container = document.getElementById('reviewsSection');
   container.innerHTML = '';
-
+  
   let displayed = reviews.slice(0, visibleReviews);
   displayed.forEach((review, index) => {
     const reviewCard = document.createElement('div');
     reviewCard.className = "bg-white rounded-xl shadow-lg p-6";
-
+    
     let starsHtml = '';
     for (let i = 1; i <= 5; i++) {
       starsHtml += `<i class="fas fa-star ${i <= review.rating ? 'text-yellow-400' : 'text-gray-300'}"></i>`;
     }
-
+    
+    // Parse the ISO date string back to a readable format
+    const date = new Date(review.date);
+    const formattedDate = date.toLocaleString();
+    
     reviewCard.innerHTML = `
       <div class="flex justify-between mb-4">
         <h4 class="text-lg font-bold text-primary">${review.username}</h4>
@@ -1230,12 +1244,12 @@ function displayReviews() {
       </div>
       <p class="text-sm text-gray-500 mb-2">${review.service}</p>
       <p class="italic text-gray-600 mb-4">"${review.comment}"</p>
-      <p class="text-xs text-gray-400">${review.date.toLocaleString()}</p>
+      <p class="text-xs text-gray-400">${formattedDate}</p>
       <button onclick="deleteReview(${index})" class="text-red-600 mt-2">Delete Review</button>
     `;
     container.appendChild(reviewCard);
   });
-
+  
   // Show or hide Load More button
   document.getElementById('loadMoreBtn').style.display = (reviews.length > visibleReviews) ? 'block' : 'none';
   // Show Hide button if more than 4 reviews and after Load More
@@ -1259,6 +1273,10 @@ function hideReviews() {
 // Delete review function
 function deleteReview(index) {
   reviews.splice(index, 1); // remove the review from the array
+  
+  // Update localStorage after deletion
+  localStorage.setItem('testimonials', JSON.stringify(reviews));
+  
   displayReviews(); // re-render the reviews
 }
 
