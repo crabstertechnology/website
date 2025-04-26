@@ -1160,6 +1160,267 @@
       });
     }
   });
+// Konami Code Easter Egg with Simple Game
+// Add this script to your webpage to launch a fun game when users enter the Konami code
+// (Up, Up, Down, Down, Left, Right, Left, Right, B, A)
+
+document.addEventListener('DOMContentLoaded', function() {
+  // The Konami Code sequence
+  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let konamiPosition = 0;
+  
+  // Listen for keydown events
+  document.addEventListener('keydown', function(e) {
+    // Get the key that was pressed
+    const key = e.key;
+    
+    // Check if the key matches the expected key in the sequence
+    const expectedKey = konamiCode[konamiPosition];
+    
+    // If the key matches, move to the next position in the sequence
+    if (key.toLowerCase() === expectedKey.toLowerCase()) {
+      konamiPosition++;
+      
+      // If the entire sequence has been entered correctly, trigger the Easter egg
+      if (konamiPosition === konamiCode.length) {
+        activateEasterEgg();
+        konamiPosition = 0; // Reset for next time
+      }
+    } else {
+      // If the key doesn't match, reset the sequence
+      konamiPosition = 0;
+    }
+  });
+  
+  // Function to activate the Easter egg
+  function activateEasterEgg() {
+    console.log("Konami Code activated!");
+    
+    // Create a modal container
+    const gameModal = document.createElement('div');
+    gameModal.style.position = 'fixed';
+    gameModal.style.top = '0';
+    gameModal.style.left = '0';
+    gameModal.style.width = '100%';
+    gameModal.style.height = '100%';
+    gameModal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    gameModal.style.display = 'flex';
+    gameModal.style.justifyContent = 'center';
+    gameModal.style.alignItems = 'center';
+    gameModal.style.zIndex = '9999';
+    
+    // Create the game container
+    const gameContainer = document.createElement('div');
+    gameContainer.style.width = '600px';
+    gameContainer.style.height = '400px';
+    gameContainer.style.backgroundColor = '#333';
+    gameContainer.style.borderRadius = '10px';
+    gameContainer.style.overflow = 'hidden';
+    gameContainer.style.position = 'relative';
+    gameContainer.style.boxShadow = '0 0 20px rgba(255, 100, 0, 0.7)';
+    gameContainer.style.border = '3px solid #FF6700';
+    
+    // Create game header
+    const gameHeader = document.createElement('div');
+    gameHeader.style.backgroundColor = '#FF6700';
+    gameHeader.style.color = 'white';
+    gameHeader.style.padding = '10px';
+    gameHeader.style.textAlign = 'center';
+    gameHeader.style.fontFamily = 'sans-serif';
+    gameHeader.style.fontSize = '18px';
+    gameHeader.style.fontWeight = 'bold';
+    gameHeader.style.display = 'flex';
+    gameHeader.style.justifyContent = 'space-between';
+    gameHeader.style.alignItems = 'center';
+    
+    // Create score display
+    const scoreDisplay = document.createElement('div');
+    scoreDisplay.id = 'game-score';
+    scoreDisplay.textContent = 'Score: 0';
+    scoreDisplay.style.color = 'white';
+    
+    // Create title
+    const gameTitle = document.createElement('div');
+    gameTitle.textContent = 'SECRET PROJECT: CATCH THE BUGS';
+    
+    // Create close button
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'X';
+    closeButton.style.background = 'none';
+    closeButton.style.border = 'none';
+    closeButton.style.color = 'white';
+    closeButton.style.fontSize = '20px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.fontWeight = 'bold';
+    closeButton.onclick = function() {
+      document.body.removeChild(gameModal);
+    };
+    
+    // Append elements to header
+    gameHeader.appendChild(scoreDisplay);
+    gameHeader.appendChild(gameTitle);
+    gameHeader.appendChild(closeButton);
+    
+    // Create game canvas
+    const gameCanvas = document.createElement('canvas');
+    gameCanvas.id = 'game-canvas';
+    gameCanvas.width = 600;
+    gameCanvas.height = 350;
+    gameCanvas.style.backgroundColor = '#111';
+    
+    // Append elements to containers
+    gameContainer.appendChild(gameHeader);
+    gameContainer.appendChild(gameCanvas);
+    gameModal.appendChild(gameContainer);
+    document.body.appendChild(gameModal);
+    
+    // Initialize and start the game
+    initGame();
+  }
+  
+  // Function to initialize and run the game
+  function initGame() {
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('game-score');
+    
+    let score = 0;
+    let bugs = [];
+    let player = {
+      x: canvas.width / 2,
+      y: canvas.height - 50,
+      width: 50,
+      height: 50,
+      speed: 8
+    };
+    
+    // Key states for smooth movement
+    let keys = {
+      ArrowLeft: false,
+      ArrowRight: false
+    };
+    
+    // Add event listeners for keyboard input
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        keys[e.key] = true;
+        // Prevent scrolling when playing
+        e.preventDefault();
+      }
+    });
+    
+    window.addEventListener('keyup', function(e) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        keys[e.key] = false;
+      }
+    });
+    
+    // Bug class
+    class Bug {
+      constructor() {
+        this.width = 30;
+        this.height = 30;
+        this.x = Math.random() * (canvas.width - this.width);
+        this.y = -this.height;
+        this.speed = 2 + Math.random() * 3;
+        this.color = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+        this.caught = false;
+      }
+      
+      update() {
+        this.y += this.speed;
+        
+        // Check if bug is caught
+        if (!this.caught && this.y + this.height >= player.y && 
+            this.x + this.width >= player.x && 
+            this.x <= player.x + player.width) {
+          this.caught = true;
+          score += 10;
+          scoreDisplay.textContent = `Score: ${score}`;
+        }
+      }
+      
+      draw() {
+        if (!this.caught) {
+          ctx.fillStyle = this.color;
+          ctx.fillRect(this.x, this.y, this.width, this.height);
+          
+          // Draw bug features
+          ctx.fillStyle = 'black';
+          // Eyes
+          ctx.fillRect(this.x + 5, this.y + 8, 5, 5);
+          ctx.fillRect(this.x + this.width - 10, this.y + 8, 5, 5);
+          // Mouth
+          ctx.fillRect(this.x + 10, this.y + 20, 10, 3);
+          
+          // Antennae
+          ctx.beginPath();
+          ctx.moveTo(this.x + 8, this.y);
+          ctx.lineTo(this.x + 5, this.y - 8);
+          ctx.stroke();
+          
+          ctx.beginPath();
+          ctx.moveTo(this.x + this.width - 8, this.y);
+          ctx.lineTo(this.x + this.width - 5, this.y - 8);
+          ctx.stroke();
+        }
+      }
+    }
+    
+    // Function to spawn new bugs
+    function spawnBug() {
+      bugs.push(new Bug());
+      setTimeout(spawnBug, 1000 + Math.random() * 1500);
+    }
+    
+    // Draw the player
+    function drawPlayer() {
+      ctx.fillStyle = '#FF6700';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+      
+      // Draw player details
+      ctx.fillStyle = 'white';
+      // Eyes
+      ctx.fillRect(player.x + 10, player.y + 15, 8, 8);
+      ctx.fillRect(player.x + player.width - 18, player.y + 15, 8, 8);
+      // Smile
+      ctx.beginPath();
+      ctx.arc(player.x + player.width/2, player.y + 30, 10, 0, Math.PI);
+      ctx.stroke();
+    }
+    
+    // Main game loop
+    function gameLoop() {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Update player position
+      if (keys.ArrowLeft && player.x > 0) {
+        player.x -= player.speed;
+      }
+      if (keys.ArrowRight && player.x < canvas.width - player.width) {
+        player.x += player.speed;
+      }
+      
+      // Update and draw bugs
+      bugs = bugs.filter(bug => bug.y < canvas.height);
+      bugs.forEach(bug => {
+        bug.update();
+        bug.draw();
+      });
+      
+      // Draw player
+      drawPlayer();
+      
+      // Continue the game loop
+      requestAnimationFrame(gameLoop);
+    }
+    
+    // Start the game
+    spawnBug();
+    gameLoop();
+  }
+});
 // Your bin ID and API key from JSONBin.io
 const BIN_ID = '680b59498a456b79669107e1'; // Replace with your actual Bin ID
 const API_KEY = '$2a$10$Bp8zMSKouLV7Ub5hCbPvK.7OvxsZAKH4.OS6fXuLibgUAkx0KAwf6'; // Replace with your actual API Key
